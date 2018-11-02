@@ -1,8 +1,10 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["Deploy to Azure"]
+  resolves = [
+    "Deploy to Azure",
+    "GitHub Action for npm",
+  ]
 }
-
 
 action "Deploy to Azure" {
   uses = "./.github/azdeploy"
@@ -12,4 +14,9 @@ action "Deploy to Azure" {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
     APPID = "37458cf1-603d-4b12-8563-77bff77fbb6f"
   }
+}
+
+action "GitHub Action for npm" {
+  uses = "actions/bin/filter@8738e95"
+  args = "echo \"hello world\""
 }
