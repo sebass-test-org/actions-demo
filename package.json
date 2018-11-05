@@ -6,7 +6,7 @@
   "license": "MIT",
   "author": "sdras",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
     "lint": "eslint index.js"
   },
   "dependencies": {},
