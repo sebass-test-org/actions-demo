@@ -1,7 +1,9 @@
 workflow "Deploy to staging" {
   on = "push"
   resolves = [
-    "Master"
+    "Master",
+    "Deploy to Azure stag",
+    "actions/npm@master",
   ]
 }
 
@@ -12,7 +14,7 @@ action "Master" {
 }
 
 action "Deploy to Azure stag" {
-  needs = "Master"
+  needs = ["Master", "actions/npm@master"],
   uses = "./.github/azdeploy"
   env = {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
@@ -21,8 +23,6 @@ action "Deploy to Azure stag" {
   }
   secrets = ["SERVICE_PASS"]
 }
-
-
 
 workflow "Release" {
   on = "release"
@@ -37,7 +37,19 @@ action "bitoiu/release-notify-action@master" {
     "SENDGRID_API_TOKEN",
     "RECIPIENTS",
   ]
-} 
+}
+
+action "GitHub Action for npm" {
+  uses = "actions/npm@master"
+  args = "install"
+}
+
+action "actions/npm@master" {
+  uses = "actions/npm@master"
+  needs = ["GitHub Action for npm"]
+  args = "lint"
+}
+
 
 # workflow "Deploy to production" {
 #   on = "release"
