@@ -52,10 +52,10 @@ action "actions/npm@master" {
 
 workflow "delete merged branch" {
   on = "pull_request"
-  resolves = ["SvanBoxel/delete-merged-branch@ 754715983e0f51286236b986f15a7dfc1e5a0b4a"]
+  resolves = ["SvanBoxel/delete-merged-branch@18427b99b697f6d2cddf37652f25ee2603759761"]
 }
 
-action "SvanBoxel/delete-merged-branch@ 754715983e0f51286236b986f15a7dfc1e5a0b4a" {
+action "SvanBoxel/delete-merged-branch@18427b99b697f6d2cddf37652f25ee2603759761" {
   uses = "SvanBoxel/delete-merged-branch@docker-actions"
 } # workflow "Deploy to production" {
 
