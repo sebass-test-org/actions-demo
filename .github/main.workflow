@@ -14,7 +14,7 @@ action "Master" {
 }
 
 action "Deploy to Azure stag" {
-  needs = ["Master", "actions/npm@master"],
+  needs = ["Master", "actions/npm@master"]
   uses = "./.github/azdeploy"
   env = {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
@@ -50,8 +50,19 @@ action "actions/npm@master" {
   args = "test"
 }
 
+workflow "delete merged branch" {
+  on = "pull_request"
+  resolves = ["SvanBoxel/delete-merged-branch@docker-actions"]
+}
 
-# workflow "Deploy to production" {
+action "Filters for GitHub Actions" {
+  uses = "actions/bin/filter@95c1a3b"
+}
+
+action "SvanBoxel/delete-merged-branch@docker-actions" {
+  uses = "SvanBoxel/delete-merged-branch@docker-actions"
+  needs = ["Filters for GitHub Actions"]
+}# workflow "Deploy to production" {
 #   on = "release"
 #   resolves = [
 #     "Deploy to Azure prod",
