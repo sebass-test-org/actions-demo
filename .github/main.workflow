@@ -1,8 +1,8 @@
 workflow "Deploy to staging" {
   on = "push"
   resolves = [
-    "Deploy to Azure stag",
     "Master",
+    "docker://bitoiu/release-notifiy-action",
   ]
 }
 
@@ -23,20 +23,21 @@ action "Deploy to Azure stag" {
   secrets = ["SERVICE_PASS"]
 }
 
-
-workflow "Deploy to production" {
-  on = "release"
-  resolves = [
-    "Deploy to Azure prod",
-  ]
-}
-
-action "Deploy to Azure prod" {
-  uses = "./.github/azdeploy"
-  env = {
-    TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
-    APPID = "99c953c7-8726-4767-9d76-aeece4663224"
-    SERVICE_PRINCIPAL = "http://azure-action-octodemo-prod"
-  }
-  secrets = ["SERVICE_PASS"]
-}
+action "docker://bitoiu/release-notifiy-action" {
+  uses = "docker://bitoiu/release-notifiy-action"
+  needs = ["Deploy to Azure stag"]
+}# workflow "Deploy to production" {
+#   on = "release"
+#   resolves = [
+#     "Deploy to Azure prod",
+#   ]
+# }
+# action "Deploy to Azure prod" {
+#   uses = "./.github/azdeploy"
+#   env = {
+#     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
+#     APPID = "99c953c7-8726-4767-9d76-aeece4663224"
+#     SERVICE_PRINCIPAL = "http://azure-action-octodemo-prod"
+#   }
+#   secrets = ["SERVICE_PASS"]
+# }
