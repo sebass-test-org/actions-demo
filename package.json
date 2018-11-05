@@ -7,7 +7,7 @@
   "author": "sdras",
   "scripts": {
     "start": "node index.js",
-    "lint": "eslint index.js"
+    "test": "eslint index.js"
   },
   "dependencies": {},
   "devDependencies": {
