@@ -1,8 +1,7 @@
 workflow "Deploy to staging" {
   on = "push"
   resolves = [
-    "Master",
-    "bitoiu/release-notify-action@master",
+    "Master"
   ]
 }
 
@@ -23,15 +22,24 @@ action "Deploy to Azure stag" {
   secrets = ["SERVICE_PASS"]
 }
 
+
+
+workflow "Release" {
+  on = "release"
+  resolves = [
+    "bitoiu/release-notify-action@master",
+  ]
+}
+
 action "bitoiu/release-notify-action@master" {
   uses = "bitoiu/release-notify-action@master"
-  needs = ["Deploy to Azure stag"]
   secrets = [
     "SENDGRID_API_TOKEN",
     "RECIPIENTS",
   ]
-} # workflow "Deploy to production" {
+} 
 
+# workflow "Deploy to production" {
 #   on = "release"
 #   resolves = [
 #     "Deploy to Azure prod",
