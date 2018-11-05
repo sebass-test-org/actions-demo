@@ -2,7 +2,7 @@ workflow "Deploy to staging" {
   on = "push"
   resolves = [
     "Master",
-    "docker://bitoiu/release-notifiy-action",
+    "bitoiu/release-notify-action@master",
   ]
 }
 
@@ -23,7 +23,7 @@ action "Deploy to Azure stag" {
   secrets = ["SERVICE_PASS"]
 }
 
-action "docker://bitoiu/release-notifiy-action" {
+action "bitoiu/release-notify-action@master" {
   uses = "docker://bitoiu/release-notifiy-action"
   needs = ["Deploy to Azure stag"]
   secrets = ["RECIPIENTS", "SENDGRID_API_TOKEN"]
