@@ -52,10 +52,10 @@ action "actions/npm@master" {
 
 workflow "delete merged branch" {
   on = "pull_request"
-  resolves = ["SvanBoxel/delete-merged-branch@893b3b4"]
+  resolves = ["SvanBoxel/delete-merged-branch@e8123db"]
 }
 
-action "SvanBoxel/delete-merged-branch@893b3b4" {
+action "SvanBoxel/delete-merged-branch@e8123db" {
   uses = "SvanBoxel/delete-merged-branch@docker-actions"
   secrets = ["GITHUB_TOKEN"]
 } # workflow "Deploy to production" {
