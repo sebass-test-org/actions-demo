@@ -47,7 +47,7 @@ action "GitHub Action for npm" {
 action "actions/npm@master" {
   uses = "actions/npm@master"
   needs = ["GitHub Action for npm"]
-  args = "lint"
+  args = "test"
 }
 
 
