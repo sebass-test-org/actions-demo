@@ -3,10 +3,12 @@ workflow "New workflow" {
   resolves = [
     "Deploy to Azure",
     "GitHub Action for npm",
+    "Master",
   ]
 }
 
 action "Deploy to Azure" {
+  needs = "Master"
   uses = "./.github/azdeploy"
   env = {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
@@ -14,6 +16,13 @@ action "Deploy to Azure" {
     SERVICE_PRINCIPAL = "http://azure-action-octodemo"
   }
   secrets = ["SERVICE_PASS"]
+}
+
+
+# Filter for master branch
+action "Master" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
 }
 
 action "GitHub Action for npm" {
