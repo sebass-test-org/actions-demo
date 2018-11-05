@@ -55,14 +55,10 @@ workflow "delete merged branch" {
   resolves = ["SvanBoxel/delete-merged-branch@docker-actions"]
 }
 
-action "Filters for GitHub Actions" {
-  uses = "actions/bin/filter@95c1a3b"
-}
-
 action "SvanBoxel/delete-merged-branch@docker-actions" {
   uses = "SvanBoxel/delete-merged-branch@docker-actions"
-  needs = ["Filters for GitHub Actions"]
-}# workflow "Deploy to production" {
+} # workflow "Deploy to production" {
+
 #   on = "release"
 #   resolves = [
 #     "Deploy to Azure prod",
