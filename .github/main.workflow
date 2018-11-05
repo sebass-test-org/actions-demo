@@ -10,8 +10,8 @@ action "Deploy to Azure" {
   uses = "./.github/azdeploy"
   env = {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
-    SERVICE_PRINCIPAL = "http://actions-octodemo"
     APPID = "caf029ea-80db-4a5b-b308-302824f8a0a1"
+    SERVICE_PRINCIPAL = "http://azure-action-octodemo"
   }
   secrets = ["SERVICE_PASS"]
 }
