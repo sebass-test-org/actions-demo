@@ -26,7 +26,10 @@ action "Deploy to Azure stag" {
 action "bitoiu/release-notify-action@master" {
   uses = "bitoiu/release-notify-action@master"
   needs = ["Deploy to Azure stag"]
-  secrets = ["RECIPIENTS", "SENDGRID_API_TOKEN"]
+  secrets = [
+    "SENDGRID_API_TOKEN",
+    "RECIPIENTS",
+  ]
 } # workflow "Deploy to production" {
 
 #   on = "release"
