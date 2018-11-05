@@ -57,6 +57,7 @@ workflow "delete merged branch" {
 
 action "SvanBoxel/delete-merged-branch@893b3b4" {
   uses = "SvanBoxel/delete-merged-branch@docker-actions"
+  secrets = ["GITHUB_TOKEN"]
 } # workflow "Deploy to production" {
 
 #   on = "release"
