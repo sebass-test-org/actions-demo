@@ -20,4 +20,4 @@ DEPLOYPASS=`az webapp deployment list-publishing-profiles -n ${APPID} -g ${APPID
 
 git remote add azure https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsites.net/${APPID}.git
 
-git push azure master
+git push azure master -f
