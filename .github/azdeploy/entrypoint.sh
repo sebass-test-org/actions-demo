@@ -19,7 +19,7 @@ DEPLOYUSER=`az webapp deployment list-publishing-profiles -n ${APPID} -g ${APPID
 DEPLOYPASS=`az webapp deployment list-publishing-profiles -n ${APPID} -g ${APPID}-group --query '[0].userPWD' -o tsv`
 
 GIT_URL="https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsites.net/${APPID}.git"
-echo GIT_URL
+echo $GIT_URL
 git remote add azure https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsites.net/${APPID}.git
 
 git push azure master -f
