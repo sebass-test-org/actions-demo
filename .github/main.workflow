@@ -4,6 +4,7 @@ workflow "Deploy to staging" {
     "Master",
     "Deploy to Azure stag",
     "actions/npm@master",
+    "Filters for GitHub Actions-2",
   ]
 }
 
@@ -70,4 +71,15 @@ action "SvanBoxel/delete-merged-branch@master" {
 action "Filters for GitHub Actions" {
   uses = "actions/bin/filter@95c1a3b"
   args = "action closed"
+}
+
+action "Filters for GitHub Actions-1" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "TESTT=abc"
+}
+
+action "Filters for GitHub Actions-2" {
+  uses = "actions/bin/filter@95c1a3b"
+  needs = ["Filters for GitHub Actions-1"]
+  args = "echo $TESTT"
 }
