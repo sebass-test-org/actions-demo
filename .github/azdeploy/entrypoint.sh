@@ -2,7 +2,9 @@
 
 set -e
 
-curl -H "Authorization: token ${GITHUB_TOKEN}"  -d '{"ref": "master", "environment": "staging", "required_contexts": []}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments
+DEPLOYMENT_ID=`curl -H "Authorization: token ${GITHUB_TOKEN}"  -d '{"ref": "master"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments -s | jq -r '.id'`
+
+echo $DEPLOYMENT_ID
 
 echo "Login"
 az login --service-principal --username "${SERVICE_PRINCIPAL}" --password "${SERVICE_PASS}" --tenant "${TENANT_ID}"
