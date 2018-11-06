@@ -30,4 +30,4 @@ git remote add azure https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsi
 
 git push azure master -f
 
-curl -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.full+json" -d '{"state": "success", "environment_url": "http://${DEPLOYMENT_URL}"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${DEPLOYMENT_ID}/statuses -s
+curl -H "Authorization: token ${GITHUB_TOKEN}" -H "Accept: application/vnd.github.full+json" -d '{"state": "success", "environment_url": "http://${DEPLOYMENT_URL}", "description": "Successfully deployed ${GITHUB_REF}"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${DEPLOYMENT_ID}/statuses -s
