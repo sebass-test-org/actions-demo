@@ -16,7 +16,8 @@ echo "Creating app service plan ${APPID}-plan"
 az appservice plan create -g ${APPID}-group -n ${APPID}-plan --sku FREE
 
 echo "Creating webapp ${APPID}"
-az webapp create -g ${APPID}-group -p ${APPID}-plan -n ${APPID} --deployment-local-git
+
+DEPLOYMENT_URL=`az webapp create -g ${APPID}-group -p ${APPID}-plan -n ${APPID} --deployment-local-git | jq -r '.hostNames[0]'`
 
 echo "Getting username/password for deployment"
 DEPLOYUSER=`az webapp deployment list-publishing-profiles -n ${APPID} -g ${APPID}-group --query '[0].userName' -o tsv`
@@ -28,4 +29,4 @@ git remote add azure https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsi
 
 git push azure master -f
 
-curl -H "Authorization: token ${GITHUB_TOKEN}" -d '{"state": "success"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${DEPLOYMENT_ID}/statuses
+curl -H "Authorization: token ${GITHUB_TOKEN}" -d '{"state": "success", environment_url: "${DEPLOYMENT_URL}"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${DEPLOYMENT_ID}/statuses
