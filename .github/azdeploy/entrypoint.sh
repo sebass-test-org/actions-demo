@@ -2,7 +2,7 @@
 
 set -e
 
-DEPLOYMENT_ID=`curl -H "Authorization: token ${GITHUB_TOKEN}"  -d '{"ref": "master", "environment": "staging", "required_contexts": []}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments -s | jq -r '.id'`
+DEPLOYMENT_ID=`curl -H "Authorization: token ${GITHUB_TOKEN}" -d '{"ref": "master", "environment": "staging", "required_contexts": []}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments -s | jq -r '.id'`
 
 echo $DEPLOYMENT_ID
 
@@ -28,3 +28,4 @@ git remote add azure https://${DEPLOYUSER}:${DEPLOYPASS}@${APPID}.scm.azurewebsi
 
 git push azure master -f
 
+curl -H "Authorization: token ${GITHUB_TOKEN}" -d '{"state": "success"}' https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments/${DEPLOYMENT_ID}/statuses
