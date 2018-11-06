@@ -21,7 +21,10 @@ action "Deploy to Azure stag" {
     APPID = "caf029ea-80db-4a5b-b308-302824f8a0a1"
     SERVICE_PRINCIPAL = "http://azure-action-octodemo"
   }
-  secrets = ["SERVICE_PASS"]
+  secrets = [
+    "SERVICE_PASS",
+    "GITHUB_TOKEN",
+  ]
 }
 
 workflow "Release" {
