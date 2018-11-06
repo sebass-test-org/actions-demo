@@ -75,7 +75,7 @@ action "Filters for GitHub Actions" {
 
 action "Filters for GitHub Actions-1" {
   uses = "actions/bin/filter@95c1a3b"
-  args = "TESTT=abc"
+  args = "TESTT=\"abc123\""
 }
 
 action "Filters for GitHub Actions-2" {
