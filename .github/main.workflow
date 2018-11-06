@@ -52,25 +52,19 @@ action "actions/npm@master" {
 
 workflow "delete merged branch" {
   on = "pull_request"
-  resolves = ["SvanBoxel/delete-merged-branch@master"]
+  resolves = [
+    "SvanBoxel/delete-merged-branch@master",
+    "Filters for GitHub Actions",
+  ]
 }
 
 action "SvanBoxel/delete-merged-branch@master" {
+  needs = "Filters for GitHub Actions"
   uses = "SvanBoxel/delete-merged-branch@master"
   secrets = ["GITHUB_TOKEN"]
-} # workflow "Deploy to production" {
+}
 
-#   on = "release"
-#   resolves = [
-#     "Deploy to Azure prod",
-#   ]
-# }
-# action "Deploy to Azure prod" {
-#   uses = "./.github/azdeploy"
-#   env = {
-#     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
-#     APPID = "99c953c7-8726-4767-9d76-aeece4663224"
-#     SERVICE_PRINCIPAL = "http://azure-action-octodemo-prod"
-#   }
-#   secrets = ["SERVICE_PASS"]
-# }
+action "Filters for GitHub Actions" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "action closed"
+}
