@@ -81,5 +81,5 @@ action "Filters for GitHub Actions-1" {
 action "Filters for GitHub Actions-2" {
   uses = "actions/bin/filter@95c1a3b"
   needs = ["Filters for GitHub Actions-1"]
-  args = "echo $TESTT"
+  args = "echo \"aaa${TESTT}\""
 }
