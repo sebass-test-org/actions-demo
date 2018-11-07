@@ -1,20 +1,19 @@
 workflow "Deploy to staging" {
   on = "push"
-  resolves = [
-    "Master",
-    "Deploy to Azure stag",
-    "actions/npm@master",
-  ]
+  resolves = ["Deploy to Azure stag"]
 }
 
 # Filter for master branch
-action "Master" {
+action "Check branch" {
   uses = "actions/bin/filter@master"
   args = "branch master"
 }
 
 action "Deploy to Azure stag" {
-  needs = ["Master", "actions/npm@master"]
+  needs = [
+    "Run tests",
+    "Run build",
+  ]
   uses = "./.github/azdeploy"
   env = {
     TENANT_ID = "daebfcd0-e8cd-4370-af52-cb35ef2de5da"
@@ -42,17 +41,6 @@ action "bitoiu/release-notify-action@master" {
   ]
 }
 
-action "GitHub Action for npm" {
-  uses = "actions/npm@master"
-  args = "install"
-}
-
-action "actions/npm@master" {
-  uses = "actions/npm@master"
-  needs = ["GitHub Action for npm"]
-  args = "test"
-}
-
 workflow "delete merged branch" {
   on = "pull_request"
   resolves = [
@@ -70,4 +58,15 @@ action "SvanBoxel/delete-merged-branch@master" {
 action "Filters for GitHub Actions" {
   uses = "actions/bin/filter@95c1a3b"
   args = "action closed"
+}
+
+action "Run tests" {
+  uses = "actions/npm@33871a7"
+  args = "test"
+  needs = ["Check branch"]
+}
+
+action "Run build" {
+  uses = "actions/npm@33871a7"
+  needs = ["Check branch"]
 }
