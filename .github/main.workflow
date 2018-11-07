@@ -1,13 +1,9 @@
+# Deploy to staging workflow
 workflow "Deploy to staging" {
   on = "push"
   resolves = ["Deploy to Azure stag"]
 }
 
-# Filter for master branch
-action "Check branch" {
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
 
 action "Deploy to Azure stag" {
   needs = [
@@ -26,6 +22,27 @@ action "Deploy to Azure stag" {
   ]
 }
 
+# Filter for master branch
+action "Check branch" {
+  uses = "actions/bin/filter@master"
+  args = "branch master"
+}
+
+action "Run tests" {
+  uses = "actions/npm@33871a7"
+  args = "test"
+  needs = ["Check branch"]
+}
+
+action "Run build" {
+  uses = "actions/npm@33871a7"
+  needs = ["Check branch"]
+}
+
+# End deploy to staging workflow
+
+
+# Release workflow
 workflow "Release" {
   on = "release"
   resolves = [
@@ -40,7 +57,10 @@ action "bitoiu/release-notify-action@master" {
     "RECIPIENTS",
   ]
 }
+# End release workflow
 
+
+# Delete merged branch workflow
 workflow "delete merged branch" {
   on = "pull_request"
   resolves = [
@@ -60,13 +80,4 @@ action "Filters for GitHub Actions" {
   args = "action closed"
 }
 
-action "Run tests" {
-  uses = "actions/npm@33871a7"
-  args = "test"
-  needs = ["Check branch"]
-}
-
-action "Run build" {
-  uses = "actions/npm@33871a7"
-  needs = ["Check branch"]
-}
+# End elete merged branch workflow
