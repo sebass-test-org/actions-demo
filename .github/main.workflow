@@ -7,7 +7,6 @@ workflow "Deploy to staging" {
 action "Deploy to Azure stag" {
   needs = [
     "Run tests",
-    "Install deps",
   ]
   uses = "./.github/azdeploy"
   env = {
@@ -30,12 +29,11 @@ action "Check branch" {
 action "Run tests" {
   uses = "actions/npm@33871a7"
   args = "test"
-  needs = ["Check branch"]
+  needs = ["Check branch", "Install deps"]
 }
 
 action "Install deps" {
   uses = "actions/npm@33871a7"
-  needs = ["Check branch"]
   args = "install"
 }
 
