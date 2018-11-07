@@ -4,11 +4,10 @@ workflow "Deploy to staging" {
   resolves = ["Deploy to Azure stag"]
 }
 
-
 action "Deploy to Azure stag" {
   needs = [
     "Run tests",
-    "Run build",
+    "Install deps",
   ]
   uses = "./.github/azdeploy"
   env = {
@@ -34,13 +33,13 @@ action "Run tests" {
   needs = ["Check branch"]
 }
 
-action "Run build" {
+action "Install deps" {
   uses = "actions/npm@33871a7"
   needs = ["Check branch"]
+  args = "install"
 }
 
 # End deploy to staging workflow
-
 
 # Release workflow
 workflow "Release" {
@@ -57,8 +56,8 @@ action "bitoiu/release-notify-action@master" {
     "RECIPIENTS",
   ]
 }
-# End release workflow
 
+# End release workflow
 
 # Delete merged branch workflow
 workflow "delete merged branch" {
