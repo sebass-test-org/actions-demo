@@ -44,6 +44,7 @@ workflow "Release" {
   on = "release"
   resolves = [
     "bitoiu/release-notify-action@master",
+    "Filters for GitHub Actions-1",
   ]
 }
 
@@ -77,4 +78,9 @@ action "Filters for GitHub Actions" {
   args = "action closed"
 }
 
+action "Filters for GitHub Actions-1" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "echo \"hello world\" "
+}# End deploy to staging workflow
+# End release workflow
 # End elete merged branch workflow
