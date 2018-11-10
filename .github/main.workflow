@@ -62,14 +62,14 @@ action "bitoiu/release-notify-action@master" {
 workflow "delete merged branch" {
   on = "pull_request"
   resolves = [
-    "SvanBoxel/delete-merged-branch@master",
     "Filters for GitHub Actions",
+    "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c",
   ]
 }
 
-action "SvanBoxel/delete-merged-branch@master" {
+action "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c" {
   needs = "Filters for GitHub Actions"
-  uses = "SvanBoxel/delete-merged-branch@exclude-branches"
+  uses = "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c"
   secrets = ["GITHUB_TOKEN"]
 }
 
