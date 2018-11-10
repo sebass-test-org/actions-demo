@@ -63,13 +63,13 @@ workflow "delete merged branch" {
   on = "pull_request"
   resolves = [
     "Filters for GitHub Actions",
-    "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c",
+    "SvanBoxel/delete-merged-branch@90f9178bf007840fd2e988b15579ae0dacff8313",
   ]
 }
 
-action "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c" {
+action "SvanBoxel/delete-merged-branch@90f9178bf007840fd2e988b15579ae0dacff8313" {
   needs = "Filters for GitHub Actions"
-  uses = "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c"
+  uses = "SvanBoxel/delete-merged-branch@90f9178bf007840fd2e988b15579ae0dacff8313"
   secrets = ["GITHUB_TOKEN"]
 }
 
