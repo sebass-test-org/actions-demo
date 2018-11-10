@@ -69,7 +69,7 @@ workflow "delete merged branch" {
 
 action "SvanBoxel/delete-merged-branch@master" {
   needs = "Filters for GitHub Actions"
-  uses = "SvanBoxel/delete-merged-branch@master"
+  uses = "SvanBoxel/delete-merged-branch@16910723f3f6746047a17a1f8faa420201b1f07b"
   secrets = ["GITHUB_TOKEN"]
 }
 
@@ -81,6 +81,7 @@ action "Filters for GitHub Actions" {
 action "Filters for GitHub Actions-1" {
   uses = "actions/bin/filter@95c1a3b"
   args = "echo \"hello world\" "
-}# End deploy to staging workflow
+} # End deploy to staging workflow
+
 # End release workflow
 # End elete merged branch workflow
