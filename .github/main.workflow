@@ -69,7 +69,7 @@ workflow "delete merged branch" {
 
 action "SvanBoxel/delete-merged-branch@master" {
   needs = "Filters for GitHub Actions"
-  uses = "SvanBoxel/delete-merged-branch@e94142368d50df809deb8cd33dd9cef01cc72d99"
+  uses = "SvanBoxel/delete-merged-branch@c997ee4cfbc9cb4bbe5ccb03817b5b48764e7a5c"
   secrets = ["GITHUB_TOKEN"]
 }
 
