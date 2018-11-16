@@ -4,7 +4,6 @@ workflow "Deploy to staging" {
   resolves = ["Deploy to Azure stag"]
 }
 
-
 action "Deploy to Azure stag" {
   needs = [
     "Run tests",
@@ -45,7 +44,7 @@ workflow "Release" {
   on = "release"
   resolves = [
     "bitoiu/release-notify-action@master",
-    "Filters for GitHub Actions-1",
+    "nexmo-community/nexmo-sms-action",
   ]
 }
 
@@ -79,10 +78,7 @@ action "Filters for GitHub Actions" {
   args = "action closed"
 }
 
-action "Filters for GitHub Actions-1" {
-  uses = "actions/bin/filter@95c1a3b"
-  args = "echo \"hello world\" "
-} # End deploy to staging workflow
+# End deploy to staging workflow
 
 workflow "Failing CI alarm" {
   on = "status"
@@ -112,4 +108,15 @@ action "maddox/actions/tree/master/home-assistant" {
     DOMAIN = "light"
     SERVICE = "turn_on"
   }
+}
+
+action "nexmo-community/nexmo-sms-action" {
+  uses = "nexmo-community/nexmo-sms-action"
+
+  secrets = [
+     "NEXMO_API_KEY",
+      "NEXMO_API_SECRET",
+      "NEXMO_NUMBER"
+  ]
+  args = "+31614432016 New release on $GITHUB_REPOSITORY from $GITHUB_ACTOR."
 }
