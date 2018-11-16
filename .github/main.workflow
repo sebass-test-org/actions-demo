@@ -4,6 +4,7 @@ workflow "Deploy to staging" {
   resolves = ["Deploy to Azure stag"]
 }
 
+
 action "Deploy to Azure stag" {
   needs = [
     "Run tests",
