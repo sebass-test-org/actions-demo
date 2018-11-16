@@ -111,7 +111,7 @@ action "maddox/actions/tree/master/home-assistant" {
 }
 
 action "nexmo-community/nexmo-sms-action" {
-  uses = "nexmo-community/nexmo-sms-action"
+  uses = "nexmo-community/nexmo-sms-action@master"
 
   secrets = [
      "NEXMO_API_KEY",
