@@ -129,7 +129,14 @@ action "JasonEtco/create-an-issue@master" {
   uses = "JasonEtco/create-an-issue@master"
   args = "github/welcome.md"
   secrets = ["GITHUB_TOKEN"]
-} # End deploy to staging workflow
+}
 
-# End release workflow
-# End deploy to staging workflow
+workflow "Issue Checklist Checker" {
+  resolves = ["CheckChecklist"]
+  on = "issues"
+}
+
+action "CheckChecklist" {
+  uses = "waffleio/gh-actions/action-checklistchecker@master"
+  secrets = ["GITHUB_TOKEN"]
+}
