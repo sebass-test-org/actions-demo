@@ -3,7 +3,7 @@ workflow "Deploy to staging" {
   on = "push"
   resolves = [
     "Deploy to Azure stag",
-    "GitHub Action for Google Cloud",
+    "Run tests",
   ]
 }
 
@@ -146,10 +146,9 @@ action "CheckChecklist" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-action "GitHub Action for Google Cloud" {
-  uses = "actions/gcloud/cli@8ec8bfa"
-  needs = ["Run tests"]
-}# End deploy to staging workflow
+# End deploy to staging workflow
+
+
 # End release workflow
 # End deploy to staging workflow
 # End deploy to staging workflow
