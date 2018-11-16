@@ -122,7 +122,10 @@ action "nexmo-community/nexmo-sms-action" {
 
 workflow "Welcome member" {
   on = "member"
-  resolves = ["JasonEtco/create-an-issue@master"]
+  resolves = [
+    "JasonEtco/create-an-issue@master",
+    "Filters for GitHub Actions-1",
+  ]
 }
 
 action "JasonEtco/create-an-issue@master" {
@@ -140,3 +143,10 @@ action "CheckChecklist" {
   uses = "waffleio/gh-actions/action-checklistchecker@master"
   secrets = ["GITHUB_TOKEN"]
 }
+
+action "Filters for GitHub Actions-1" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "echo \"Hello world\""
+}# End deploy to staging workflow
+# End release workflow
+# End deploy to staging workflow
