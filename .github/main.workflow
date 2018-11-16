@@ -112,11 +112,23 @@ action "maddox/actions/tree/master/home-assistant" {
 
 action "nexmo-community/nexmo-sms-action" {
   uses = "nexmo-community/nexmo-sms-action@master"
-
   secrets = [
-     "NEXMO_API_KEY",
-      "NEXMO_API_SECRET",
-      "NEXMO_NUMBER"
+    "NEXMO_API_KEY",
+    "NEXMO_API_SECRET",
+    "NEXMO_NUMBER",
   ]
   args = "+31614432016 New release on $GITHUB_REPOSITORY from $GITHUB_ACTOR."
 }
+
+workflow "Welcome" {
+  on = "member"
+  resolves = ["JasonEtco/create-an-issue@master"]
+}
+
+action "JasonEtco/create-an-issue@master" {
+  uses = "JasonEtco/create-an-issue@master"
+  args = "github/welcome.md"
+  secrets = ["GITHUB_TOKEN"]
+}# End deploy to staging workflow
+# End release workflow
+# End deploy to staging workflow
