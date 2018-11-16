@@ -85,12 +85,7 @@ action "Filters for GitHub Actions-1" {
 
 workflow "Failing CI alarm" {
   on = "status"
-  resolves = ["Filters for GitHub Actions-2", "maddox/actions/tree/master/home-assistant"]
-}
-
-action "Filters for GitHub Actions-2" {
-  uses = "actions/bin/filter@95c1a3b"
-  args = "action completed"
+  resolves = ["maddox/actions/tree/master/home-assistant"]
 }
 
 action "Filters for GitHub Actions-3" {
@@ -98,9 +93,15 @@ action "Filters for GitHub Actions-3" {
   args = "branch master"
 }
 
+action "Is failing" {
+  uses = "docker://superbbears/filter:0.2.0"
+  runs = ["sh", "-c"]
+  args = ["jq -r '.state?' $GITHUB_EVENT_PATH | grep -q failure"]
+}
+
 action "maddox/actions/tree/master/home-assistant" {
   uses = "maddox/actions/home-assistant@master"
-  needs = ["Filters for GitHub Actions-3", "Filters for GitHub Actions-2"]
+  needs = ["Filters for GitHub Actions-3", "Is failing"]
   secrets = ["HASS_HOST", "HASS_TOKEN"]
   env = {
     SERVICE_DATA = "{\n  \"entity_id\": \"light.office\",\n  \"flash\": \"short\"\n}"
