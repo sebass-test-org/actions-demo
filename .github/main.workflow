@@ -88,7 +88,7 @@ workflow "Failing CI alarm" {
   resolves = ["maddox/actions/tree/master/home-assistant"]
 }
 
-action "Filters for GitHub Actions-3" {
+action "Check for master branch" {
   uses = "actions/bin/filter@95c1a3b"
   args = "branch master"
 }
@@ -101,7 +101,10 @@ action "Is failing" {
 
 action "maddox/actions/tree/master/home-assistant" {
   uses = "maddox/actions/home-assistant@master"
-  needs = ["Filters for GitHub Actions-3", "Is failing"]
+  needs = [
+    "Is failing",
+    "Check for master branch",
+  ]
   secrets = ["HASS_HOST", "HASS_TOKEN"]
   env = {
     SERVICE_DATA = "{\n  \"entity_id\": \"light.office\",\n  \"flash\": \"short\"\n}"
