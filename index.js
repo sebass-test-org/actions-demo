@@ -2,7 +2,7 @@ var http = require('http')
 
 var server = http.createServer(function(request, response) {
   response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' })
-  response.write('Hello Xebia! 👋 \n\n')
+  response.write('Hello WinOps! 👋 \n\n')
   response.write(`Server time: ${new Date(Date.now()).toLocaleString()}`)
   response.end();
 })
