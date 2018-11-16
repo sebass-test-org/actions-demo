@@ -83,5 +83,28 @@ action "Filters for GitHub Actions-1" {
   args = "echo \"hello world\" "
 } # End deploy to staging workflow
 
-# End release workflow
-# End elete merged branch workflow
+workflow "Failing CI alarm" {
+  on = "status"
+  resolves = ["Filters for GitHub Actions-2", "maddox/actions/tree/master/home-assistant"]
+}
+
+action "Filters for GitHub Actions-2" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "action completed"
+}
+
+action "Filters for GitHub Actions-3" {
+  uses = "actions/bin/filter@95c1a3b"
+  args = "branch master"
+}
+
+action "maddox/actions/tree/master/home-assistant" {
+  uses = "maddox/actions/home-assistant@master"
+  needs = ["Filters for GitHub Actions-3", "Filters for GitHub Actions-2"]
+  secrets = ["HASS_HOST", "HASS_TOKEN"]
+  env = {
+    SERVICE_DATA = "{\n  \"entity_id\": \"light.office\",\n  \"flash\": \"short\"\n}"
+    DOMAIN = "light"
+    SERVICE = "turn_on"
+  }
+}
