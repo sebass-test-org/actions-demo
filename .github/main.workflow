@@ -4,6 +4,7 @@ workflow "Deploy to staging" {
   resolves = [
     "Deploy to Azure stag",
     "Run tests",
+    "alpine-bash:latest",
   ]
 }
 
@@ -136,7 +137,7 @@ action "JasonEtco/create-an-issue@master" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-workflow "Issue Checklist Checker" {
+workflow "Issue Checklist Checker " {
   resolves = ["CheckChecklist"]
   on = "issues"
 }
@@ -146,9 +147,14 @@ action "CheckChecklist" {
   secrets = ["GITHUB_TOKEN"]
 }
 
+action "alpine-bash:latest" {
+  uses = "alpine-bash:latest"
+  runs = "echo \"Hello world\""
+  secrets = ["TESTING_SECRETS"]
+}# End deploy to staging workflow
+# End release workflow
 # End deploy to staging workflow
-
-
+# End deploy to staging workflow
 # End release workflow
 # End deploy to staging workflow
 # End deploy to staging workflow
