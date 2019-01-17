@@ -148,10 +148,11 @@ action "CheckChecklist" {
 }
 
 action "alpine-bash:latest" {
-  uses = "alpine-bash:latest"
+  uses = "docker://alpine-bash:latest"
   runs = "echo \"Hello world\""
   secrets = ["TESTING_SECRETS"]
-}# End deploy to staging workflow
+} # End deploy to staging workflow
+
 # End release workflow
 # End deploy to staging workflow
 # End deploy to staging workflow
