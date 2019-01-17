@@ -4,7 +4,6 @@ workflow "Deploy to staging" {
   resolves = [
     "Deploy to Azure stag",
     "Run tests",
-    "alpine-bash:latest",
   ]
 }
 
@@ -147,11 +146,8 @@ action "CheckChecklist" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-action "alpine-bash:latest" {
-  uses = "docker://alpine-bash:latest"
-  runs = "echo \"Hello world\""
-  secrets = ["TESTING_SECRETS"]
-} # End deploy to staging workflow
+# End deploy to staging workflow
+
 
 # End release workflow
 # End deploy to staging workflow
