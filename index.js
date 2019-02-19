@@ -1,12 +1,12 @@
 const http = require('http');
 const fs = require('fs');
 
-const server = http.createServer((_, response) => {
+const server = http.createServer((request, response) => {
   fs.readFile('./index.html', (err, html) => {
     if (err) {
       throw err;
     }
-    
+
     response.writeHeader(200, { 'Content-Type': 'text/html' });
     response.write(html);
     response.write(`Server time: ${new Date(Date.now()).toLocaleString()}`)
