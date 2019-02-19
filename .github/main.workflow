@@ -94,7 +94,7 @@ action "Check for master branch" {
 }
 
 action "Is failing" {
-  uses = "docker://superbbears/filter:0.2.0"
+  uses = "docker://superbbears/filter:0.3.0"
   runs = ["sh", "-c"]
   args = ["jq -r '.state?' $GITHUB_EVENT_PATH | grep -q failure"]
 }
