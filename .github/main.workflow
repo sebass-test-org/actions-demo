@@ -3,7 +3,7 @@ workflow "Deploy to staging" {
   on = "push"
   resolves = [
     "Deploy to Azure stag",
-    "Run tests",
+    "GitHub Action for Zeit",
   ]
 }
 
@@ -146,9 +146,15 @@ action "CheckChecklist" {
   secrets = ["GITHUB_TOKEN"]
 }
 
+action "GitHub Action for Zeit" {
+  uses = "actions/zeit-now@666edee2f3632660e9829cb6801ee5b7d47b303d"
+  needs = ["Run tests"]
+  secrets = ["ZEIT_TOKEN"]
+  args = "alias"
+}# End deploy to staging workflow
+# End release workflow
 # End deploy to staging workflow
-
-
+# End deploy to staging workflow
 # End release workflow
 # End deploy to staging workflow
 # End deploy to staging workflow
