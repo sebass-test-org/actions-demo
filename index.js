@@ -1,12 +1,18 @@
 var http = require('http')
 
-var server = http.createServer(function(request, response) {
-  response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' })
-  response.write('Hello DevDays 👋👋 \n\n')
-  response.write(`Server time: ${new Date(Date.now()).toLocaleString()}`)
-  response.end();
-})
-
+var server = http.createServer((request, response) => {
+  fs.readFile('./index.html', (err, html) => {
+    if (err) {
+      throw err; 
+    }       
+    http.createServer((request, response) => {  
+      response.writeHeader(200, {"Content-Type": "text/html"});  
+      response.write(html);  
+      response.write(`Server time: ${new Date(Date.now()).toLocaleString()}`)
+      response.end();  
+    }).listen(8000);
+  });
+});
 var port = process.env.PORT || 1337
 server.listen(port)
 
