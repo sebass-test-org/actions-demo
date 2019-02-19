@@ -22,6 +22,10 @@ Make sure that issues with open tasks cannot be closed.
 For this demo two cloud environments are reserved:
 
 ## Cloud urls
+We've reserved the following urls for our deployments: 
 
-Azure: http://caf029ea-80db-4a5b-b308-302824f8a0a1.azurewebsites.net/
-Now: https://action-demo-now.now.sh/
+#### Azure
+http://caf029ea-80db-4a5b-b308-302824f8a0a1.azurewebsites.net/
+
+#### Now
+https://action-demo-now.now.sh/
