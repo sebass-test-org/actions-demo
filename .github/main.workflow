@@ -1,5 +1,5 @@
 # Deploy to staging workflow
-workflow "Deploy to staging" {
+workflow "Deploy" {
   on = "push"
   resolves = [
     "Deploy to Azure stag",
@@ -150,7 +150,7 @@ action "GitHub Action for Zeit" {
   uses = "actions/zeit-now@666edee2f3632660e9829cb6801ee5b7d47b303d"
   needs = ["Run tests"]
   secrets = ["ZEIT_TOKEN"]
-  args = "alias "
+  args = "--public "
 
   # End deploy to staging workflow
 
