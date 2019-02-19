@@ -94,7 +94,7 @@ action "Check for master branch" {
 }
 
 action "Is failing" {
-  uses = "docker://superbbears/filter:0.3.0"
+  uses = "helaili/github-graphql-action@f9197781e4fe192857ae3a20eb7b028b78097d38"
   runs = ["sh", "-c"]
   args = ["jq -r '.state?' $GITHUB_EVENT_PATH | grep -q failure"]
 }
