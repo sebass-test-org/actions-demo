@@ -9,9 +9,7 @@
     "start": "node index.js",
     "test": "eslint index.js"
   },
-  "dependencies": {
-    "merge": "1.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "5.5.0"
   }
