@@ -3,7 +3,7 @@ workflow "Deploy" {
   on = "push"
   resolves = [
     "Deploy to Azure stag",
-    "GitHub Action for Zeit",
+    "Run tests",
   ]
 }
 
@@ -146,13 +146,6 @@ action "CheckChecklist" {
   secrets = ["GITHUB_TOKEN"]
 }
 
-action "GitHub Action for Zeit" {
-  uses = "actions/zeit-now@666edee2f3632660e9829cb6801ee5b7d47b303d"
-  needs = ["Run tests"]
-  secrets = ["ZEIT_TOKEN"]
-  args = "alias"
-}
-
 workflow "update boards with issues" {
   on = "issues"
   resolves = ["Create Azure Boards Work Item"]
@@ -163,7 +156,15 @@ action "Create Azure Boards Work Item" {
   env = {
     AZURE_DEVOPS_URL = "https://dev.azure.com/svboxel" #ADO URL
     AZURE_DEVOPS_PROJECT = "ReadingTimeDemo"
-    AZURE_BOARDS_TYPE = "Task"                          #Board Type...this is from the ADO [proccess doc](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/choose-process?view=azure-devops)
+    AZURE_BOARDS_TYPE = "User story"
+
+    # End deploy to staging workflow
+
+    # End release workflow
+
+    # End deploy to staging workflow
+
+    #Board Type...this is from the ADO [proccess doc](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/choose-process?view=azure-devops)
   }
   secrets = ["AZURE_DEVOPS_TOKEN"] #ADO Token from your security settings
 }
