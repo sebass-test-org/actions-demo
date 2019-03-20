@@ -151,25 +151,18 @@ action "GitHub Action for Zeit" {
   needs = ["Run tests"]
   secrets = ["ZEIT_TOKEN"]
   args = "alias"
+}
+workflow "update boards with issues" {
+  on = "issues"
+  resolves = ["Create Azure Boards Work Item"]
+}
 
-  # End deploy to staging workflow
-
-  # End release workflow
-
-  # End deploy to staging workflow
-} # End deploy to staging workflow
-
-# End release workflow
-# End deploy to staging workflow
-# End deploy to staging workflow
-# End release workflow
-# End deploy to staging workflow
-# End deploy to staging workflow
-# End release workflow
-# End deploy to staging workflow
-# End deploy to staging workflow
-# End release workflow
-# End deploy to staging workflow
-# End deploy to staging workflow
-# End release workflow
-# End deploy to staging workflow
+action "Create Azure Boards Work Item" {
+  uses = "azure/github-actions/boards@master"
+  env = {
+    AZURE_DEVOPS_URL = "https://dev.azure.com/svboxel" #ADO URL
+    AZURE_DEVOPS_PROJECT = "ReadingTimeDemo" 
+    AZURE_BOARDS_TYPE = "Task" #Board Type...this is from the ADO [proccess doc](https://docs.microsoft.com/en-us/azure/devops/boards/work-items/guidance/choose-process?view=azure-devops)
+  }
+  secrets = ["AZURE_DEVOPS_TOKEN"] #ADO Token from your security settings
+}
