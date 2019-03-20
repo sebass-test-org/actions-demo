@@ -142,7 +142,7 @@ workflow "Issue Checklist Checker " {
 }
 
 action "CheckChecklist" {
-  uses = "waffleio/gh-actions/action-checklistchecker@master"
+  uses = "adamzolyak/checklist-checker-action@master"
   secrets = ["GITHUB_TOKEN"]
 }
 
