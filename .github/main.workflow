@@ -147,8 +147,14 @@ action "CheckChecklist" {
 }
 
 workflow "update boards with issues" {
-  on = "issues"
   resolves = ["Create Azure Boards Work Item"]
+  on = "milestone"
+
+  # End deploy to staging workflow
+
+  # End release workflow
+
+  # End deploy to staging workflow
 }
 
 action "Create Azure Boards Work Item" {
