@@ -10,7 +10,7 @@
     "test": "eslint index.js"
   },
   "dependencies": {
-    "merge": "1.0.1"
+    "merge": "1.2.1"
   },
   "devDependencies": {
     "eslint": "5.5.0"
