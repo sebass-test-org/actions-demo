@@ -1,7 +1,7 @@
 # GitHub Actions demo
 
 
-This repository contains a collection of GitHub actions that can be used for demo purposes. In the [main.workflow] file you'll find the following workflows:
+This repository contains a collection of GitHub actions that can be used for demo purposes. In the [main.workflow](https://github.com/SvanBoxel/actions-demo/tree/master/.github) file you'll find the following workflows:
 
 ## Available actions
 **Deploy to a (multi-)cloud environment**  
